@@ -1,0 +1,57 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Weather</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+      <ion-list *ngIf="!noInternet">
+          <ion-item class="name">
+              <ion-label color="secondary"> <h1>{{ model.name }}, {{ model.sys.country }} </h1> </ion-label>
+          </ion-item>
+        <ion-item>
+            <ion-label> <h1>Temperature : </h1> </ion-label>
+            <ion-label color="primary" class="second-lbl"> <h1> {{model.main.temp}} °C</h1> </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label> <h2>Temperature (max) : </h2> </ion-label>
+            <ion-label color="primary" class="second-lbl"> <h2> {{model.main.temp_max}} °C</h2> </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label> <h2>Temperature (min) : </h2> </ion-label>
+            <ion-label color="primary" class="second-lbl"> <h2> {{model.main.temp_min}} °C</h2> </ion-label>
+        </ion-item>
+        <ion-item *ngIf="model.cloudiness.length > 0"> 
+            <ion-label> <h2>Cloudiness : </h2> </ion-label>
+            <ion-label color="primary" class="second-lbl"> <h2> {{ model.cloudiness }}</h2> </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label> <h2>Pressure : </h2> </ion-label>
+            <ion-label color="primary" class="second-lbl"> <h2> {{model.main.pressure}} hpa</h2> </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label> <h2>Humidity : </h2> </ion-label>
+            <ion-label color="primary" class="second-lbl"> <h2> {{model.main.humidity}} %</h2> </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label> <h2>Wind : </h2> </ion-label>
+            <ion-label color="primary" class="second-lbl"> <h2> {{model.wind}} m/s</h2> </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ion-list *ngIf="noInternet">
+          <ion-item class="name">
+              <ion-label color="danger"> <h1> No Internet connetction. </h1> </ion-label>
+          </ion-item>
+      </ion-list>
+
+  </ion-content>
+  
